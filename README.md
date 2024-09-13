@@ -1,6 +1,7 @@
-# olhar_cidadao_app
+# Olhar Cidadão
 
-A new Flutter project.
+ É um projeto de um App social que visa facilitar a participação ativa dos cidadãos na
+ identificação e denúncia de irregularidades em suas comunidades.
 
 ## Getting Started
 
@@ -14,3 +15,4 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
