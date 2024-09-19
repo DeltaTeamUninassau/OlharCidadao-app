@@ -1,6 +1,6 @@
 {
-    "name": "olhar_cidadao_app",
-    "short_name": "olhar_cidadao_app",
+    "name": "olharcidadao_app",
+    "short_name": "olharcidadao_app",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

@@ -1,4 +1,4 @@
-package com.example.olhar_cidadao_app
+package com.example.olharcidadao_app
 
 import io.flutter.embedding.android.FlutterActivity
 
