@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:olharcidadao_app/home_page.dart';
+import 'package:olharcidadao_app/app/pages/home_page.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
