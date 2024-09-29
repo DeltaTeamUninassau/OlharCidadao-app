@@ -7,7 +7,15 @@ class SendList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Olhar Cidadão'),
+        title: const Text('Send List'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.pushNamed(context, '/result');
+          },
+          child: const Text('Enviar'),
+        ),
       ),
     );
   }
