@@ -7,7 +7,15 @@ class PhotoDescription extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Olhar Cidadão'),
+        title: const Text('Photo Description'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.pushNamed(context, '/photo');
+          },
+          child: const Text('Avançar'),
+        ),
       ),
     );
   }
