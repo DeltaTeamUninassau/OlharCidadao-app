@@ -7,7 +7,15 @@ class Photo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Olhar Cidadão'),
+        title: const Text('Photo Preview Optionso'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.pushNamed(context, '/send_list');
+          },
+          child: const Text('Continuar'),
+        ),
       ),
     );
   }
