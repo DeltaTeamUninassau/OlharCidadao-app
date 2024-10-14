@@ -7,14 +7,14 @@ class Result extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         body: Center(
-          child: SucessoWidget(),
+          child: ResultWidget(),
         ),
       ),
     );
   }
 }
 
-class SucessoWidget extends StatelessWidget {
+class ResultWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
