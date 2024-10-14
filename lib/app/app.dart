@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:olharcidadao_app/app/pages/home_page.dart';
+import 'package:olharcidadao_app/app/pages/photo.dart';
+import 'package:olharcidadao_app/app/pages/photo_description.dart';
+import 'package:olharcidadao_app/app/pages/result.dart';
+import 'package:olharcidadao_app/app/pages/send_list.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -16,7 +20,14 @@ class App extends StatelessWidget {
           foregroundColor: Colors.white,
         ),
       ),
-      home: const HomePage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const HomePage(),
+        '/photo_description': (context) => const PhotoDescription(),
+        '/photo': (context) => const Photo(),
+        '/send_list': (context) => const SendList(),
+        '/result': (context) => const Result(),
+      },
     );
   }
 }
