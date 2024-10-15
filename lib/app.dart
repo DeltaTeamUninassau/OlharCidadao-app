@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:olharcidadao_app/home_page.dart';
 import 'package:olharcidadao_app/photo.dart';
-import 'package:olharcidadao_app/photo_description.dart';
+import 'package:olharcidadao_app/screens/photo_description.dart';
 import 'package:olharcidadao_app/result.dart';
-import 'package:olharcidadao_app/send_list.dart';
+import 'package:olharcidadao_app/screens/send_list.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
