@@ -12,7 +12,7 @@ class PhotoDescription extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            Navigator.pushNamed(context, '/photo');
+            Navigator.pushNamed(context, '/phophoto_preview');
           },
           child: const Text('Avançar'),
         ),

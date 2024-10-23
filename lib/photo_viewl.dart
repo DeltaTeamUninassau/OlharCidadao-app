@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class PhotoViewl extends StatelessWidget {
+  const PhotoViewl({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Camera Screen'),
+        title: const Text('Photo Preview Optionso'),
       ),
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            Navigator.pushNamed(context, '/photo_description');
+            Navigator.pushNamed(context, '/send_list');
           },
-          child: const Text('Captura foto'),
+          child: const Text('Continuar'),
         ),
       ),
     );
