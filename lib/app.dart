@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:olharcidadao_app/camera_screen.dart';
-import 'package:olharcidadao_app/photo_description.dart';
-import 'package:olharcidadao_app/photo_viewl.dart';
-import 'package:olharcidadao_app/send_list.dart';
-import 'package:olharcidadao_app/result.dart';
+
+import 'package:olharcidadao_app/routes/app_routes.dart';
+import 'package:olharcidadao_app/routes/init_routes.dart';
+import 'package:olharcidadao_app/store/camera_store.dart';
+import 'package:provider/provider.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const CameraScreen(),
-        '/photo_description': (context) => const PhotoDescription(),
-        '/photo_preview': (context) => const PhotoViewl(),
-        '/send_list': (context) => const SendList(),
-        '/result': (context) => const Result(),
-      },
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => CameraStore(),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialRoute: AppRoutes.initial,
+        routes: initRoutes(context),
+      ),
     );
   }
 }

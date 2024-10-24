@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:olharcidadao_app/photo_preview.dart';
-import 'dart:io';
+
+import 'package:olharcidadao_app/routes/app_routes.dart';
+import 'package:olharcidadao_app/store/camera_store.dart';
+import 'package:provider/provider.dart';
 
 late List<CameraDescription> cameras;
 
@@ -54,7 +57,7 @@ class _CameraAppState extends State<CameraApp> {
     super.dispose();
   }
 
-  void _takePicture() async {
+  void _takePicture() {
     if (!_controller.value.isInitialized) {
       return;
     }
@@ -63,13 +66,23 @@ class _CameraAppState extends State<CameraApp> {
     }
 
     try {
-      await _controller.setFlashMode(_flashMode);
-      XFile file = await _controller.takePicture();
-      Navigator.push(
-        // ignore: use_build_context_synchronously
-        context,
-        MaterialPageRoute(builder: (context) => PhotoPreview(file)),
-      );
+      _controller.setFlashMode(_flashMode).then((v) {
+        _controller.takePicture().then((file) {
+          final cameraStore = Provider.of<CameraStore>(context, listen: false);
+          cameraStore.setFile(context, file);
+          // Navigator.pushNamed(
+          //   context,
+          //   AppRoutes.photoPreview,
+          //   arguments: file,
+          // );
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(
+          //     builder: (context) => PhotoPreview(file),
+          //   ),
+          // );
+        });
+      });
     } on CameraException catch (e) {
       debugPrint("Error ao tirar a foto: $e");
     }
@@ -80,10 +93,6 @@ class _CameraAppState extends State<CameraApp> {
       _flashMode =
           _flashMode == FlashMode.off ? FlashMode.always : FlashMode.off;
     });
-  }
-
-  void _exitApp() {
-    exit(0);
   }
 
   @override
@@ -137,7 +146,7 @@ class _CameraAppState extends State<CameraApp> {
         height: 48,
         child: FloatingActionButton(
           backgroundColor: const Color.fromARGB(255, 37, 110, 105),
-          onPressed: _exitApp,
+          onPressed: () {},
           child: const Text(
             "SAIR",
             style: TextStyle(color: Colors.white),

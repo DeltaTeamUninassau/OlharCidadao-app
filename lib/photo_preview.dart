@@ -2,10 +2,16 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 
+import 'package:olharcidadao_app/photo_description.dart';
+import 'package:olharcidadao_app/routes/app_routes.dart';
+import 'package:olharcidadao_app/store/camera_store.dart';
+import 'package:provider/provider.dart';
+
 // ignore: must_be_immutable
 class PhotoPreview extends StatefulWidget {
-  PhotoPreview(this.file, {super.key});
-  XFile file;
+  // final XFile file;
+
+  const PhotoPreview({super.key});
 
   @override
   State<PhotoPreview> createState() => _PhotoPreviewState();
@@ -14,7 +20,10 @@ class PhotoPreview extends StatefulWidget {
 class _PhotoPreviewState extends State<PhotoPreview> {
   @override
   Widget build(BuildContext context) {
-    File picture = File(widget.file.path);
+    // final file = widget.file;
+    // final file = ModalRoute.of(context)!.settings.arguments as XFile;
+    final cameraStore = Provider.of<CameraStore>(context);
+    File picture = File(cameraStore.file!.path);
     return Scaffold(
       body: Center(
         child: Positioned(
@@ -42,7 +51,13 @@ class _PhotoPreviewState extends State<PhotoPreview> {
         child: FloatingActionButton(
           backgroundColor: const Color.fromARGB(255, 37, 110, 105),
           onPressed: () {
-            Navigator.pushNamed(context, '/photo_description');
+            Navigator.pushNamed(context, AppRoutes.photoDescription);
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(
+            //     builder: (context) => const PhotoDescription(),
+            //   ),
+            // );
           },
           child: const Text(
             "CONTINUAR",

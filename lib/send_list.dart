@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:olharcidadao_app/routes/app_routes.dart';
 
 class SendList extends StatelessWidget {
   const SendList({super.key});
@@ -12,7 +13,7 @@ class SendList extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            Navigator.pushNamed(context, '/result');
+            Navigator.pushNamed(context, AppRoutes.result);
           },
           child: const Text('Enviar'),
         ),

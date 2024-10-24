@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:olharcidadao_app/routes/app_routes.dart';
 
 class PhotoDescription extends StatelessWidget {
   const PhotoDescription({super.key});
@@ -12,7 +13,7 @@ class PhotoDescription extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: () {
-            Navigator.pushNamed(context, '/phophoto_preview');
+            Navigator.pushNamed(context, AppRoutes.sendList);
           },
           child: const Text('Avançar'),
         ),
