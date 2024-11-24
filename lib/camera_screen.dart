@@ -10,7 +10,8 @@ class CameraScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: CameraApp());
+    return const MaterialApp(
+        debugShowCheckedModeBanner: false, home: CameraApp());
   }
 }
 
@@ -38,9 +39,11 @@ class _CameraAppState extends State<CameraApp> {
       if (e is CameraException) {
         switch (e.code) {
           case 'CameraAccessDenied':
+            // ignore: avoid_print
             print("Accesso negado");
             break;
           default:
+            // ignore: avoid_print
             print(e.description);
             break;
         }

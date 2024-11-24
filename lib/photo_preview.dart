@@ -2,6 +2,8 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 
+import 'package:olharcidadao_app/photo_description.dart';
+
 // ignore: must_be_immutable
 class PhotoPreview extends StatefulWidget {
   PhotoPreview(this.file, {super.key});
@@ -42,7 +44,10 @@ class _PhotoPreviewState extends State<PhotoPreview> {
         child: FloatingActionButton(
           backgroundColor: const Color.fromARGB(255, 37, 110, 105),
           onPressed: () {
-            Navigator.pushNamed(context, '/photo_description');
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const PhotoDescription()));
           },
           child: const Text(
             "CONTINUAR",

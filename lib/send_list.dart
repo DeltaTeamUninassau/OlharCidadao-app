@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:olharcidadao_app/result.dart';
 
 class SendList extends StatelessWidget {
   const SendList({super.key});
@@ -9,14 +10,22 @@ class SendList extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Send List'),
       ),
-      body: Center(
-        child: ElevatedButton(
+      floatingActionButton: SizedBox(
+        width: 328,
+        height: 48,
+        child: FloatingActionButton(
+          backgroundColor: const Color.fromARGB(255, 37, 110, 105),
           onPressed: () {
-            Navigator.pushNamed(context, '/result');
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const Result()));
           },
-          child: const Text('Enviar'),
+          child: const Text(
+            "Enviar",
+            style: TextStyle(color: Colors.white),
+          ),
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

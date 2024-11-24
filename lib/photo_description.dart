@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:olharcidadao_app/photo_viewl.dart';
 
 class PhotoDescription extends StatelessWidget {
   const PhotoDescription({super.key});
@@ -9,14 +10,22 @@ class PhotoDescription extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Photo Description'),
       ),
-      body: Center(
-        child: ElevatedButton(
+      floatingActionButton: SizedBox(
+        width: 328,
+        height: 48,
+        child: FloatingActionButton(
+          backgroundColor: const Color.fromARGB(255, 37, 110, 105),
           onPressed: () {
-            Navigator.pushNamed(context, '/phophoto_preview');
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const PhotoViewl()));
           },
-          child: const Text('Avançar'),
+          child: const Text(
+            "Avançar",
+            style: TextStyle(color: Colors.white),
+          ),
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
