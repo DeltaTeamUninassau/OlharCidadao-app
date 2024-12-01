@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:intl/intl.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:latlong2/latlong.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:olharcidadao_app/components/descriptionInput/index.dart';
 import 'package:olharcidadao_app/components/locationMap/index.dart';
 import 'package:olharcidadao_app/components/submitButton/index.dart';
-import 'package:geolocator/geolocator.dart';
 
 class PhotoDescription extends StatefulWidget {
   const PhotoDescription({super.key});
@@ -17,9 +17,9 @@ class PhotoDescription extends StatefulWidget {
 class _PhotoDescriptionState extends State<PhotoDescription> {
   final _descriptionController = TextEditingController();
   final int maxDescriptionLength = 256;
-  GoogleMapController? _mapController;
   LatLng _currentPosition = LatLng(-7.224688, -39.315518);
   String _currentCity = "Carregando cidade...";
+  bool _isLoadingLocation = true;
 
   @override
   void initState() {
@@ -58,7 +58,7 @@ class _PhotoDescriptionState extends State<PhotoDescription> {
     );
     setState(() {
       _currentPosition = LatLng(position.latitude, position.longitude);
-      _mapController?.animateCamera(CameraUpdate.newLatLng(_currentPosition));
+      _isLoadingLocation = false;
     });
     _getCityFromCoordinates(position.latitude, position.longitude);
   }
@@ -85,11 +85,11 @@ class _PhotoDescriptionState extends State<PhotoDescription> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Erro de Localização'),
+          title: const Text('Erro de Localização'),
           content: Text(message),
           actions: <Widget>[
             TextButton(
-              child: Text('OK'),
+              child: const Text('OK'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -103,7 +103,6 @@ class _PhotoDescriptionState extends State<PhotoDescription> {
   @override
   void dispose() {
     _descriptionController.dispose();
-    _mapController?.dispose();
     super.dispose();
   }
 
@@ -113,7 +112,7 @@ class _PhotoDescriptionState extends State<PhotoDescription> {
         DateFormat('EEE, d MMM y - HH:mm').format(DateTime.now());
 
     return Scaffold(
-      backgroundColor: Color(0xFF256E69),
+      backgroundColor: const Color(0xFF256E69),
       resizeToAvoidBottomInset: true,
       body: SafeArea(
         child: SingleChildScrollView(
@@ -124,26 +123,23 @@ class _PhotoDescriptionState extends State<PhotoDescription> {
               children: [
                 Text(
                   formattedDate,
-                  style: TextStyle(fontSize: 16, color: Colors.white),
+                  style: const TextStyle(fontSize: 16, color: Colors.white),
                 ),
-                SizedBox(height: 16),
-                Text('Local',
+                const SizedBox(height: 16),
+                const Text('Local',
                     style: TextStyle(fontSize: 16, color: Colors.white)),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 LocationMap(
                   currentPosition: _currentPosition,
-                  isLoadingLocation: false,
+                  isLoadingLocation: _isLoadingLocation,
                   currentCity: _currentCity,
-                  onMapCreated: (GoogleMapController controller) {
-                    _mapController = controller;
-                  },
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 DescriptionInput(
                   controller: _descriptionController,
                   maxLength: maxDescriptionLength,
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 SubmitButton(
                   onPressed: () {
                     Navigator.pushNamed(

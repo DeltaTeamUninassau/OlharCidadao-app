@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
 
 @immutable
 class LocationMap extends StatelessWidget {
   final LatLng currentPosition;
   final bool isLoadingLocation;
   final String currentCity;
-  final Function(GoogleMapController) onMapCreated;
 
   const LocationMap({
     Key? key,
     required this.currentPosition,
     required this.isLoadingLocation,
-    required this.onMapCreated,
     required this.currentCity,
   }) : super(key: key);
 
@@ -28,28 +27,43 @@ class LocationMap extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
           ),
           child: isLoadingLocation
-              ? Center(child: CircularProgressIndicator())
-              : GoogleMap(
-                  initialCameraPosition: CameraPosition(
-                    target: currentPosition,
-                    zoom: 15,
+              ? const Center(child: CircularProgressIndicator())
+              : FlutterMap(
+                  options: MapOptions(
+                    initialCenter: currentPosition,
+                    initialZoom: 15,
                   ),
-                  onMapCreated: (controller) {
-                    onMapCreated(controller);
-                  },
-                  zoomControlsEnabled: false,
-                  myLocationEnabled: true,
-                  myLocationButtonEnabled: true,
+                  children: [
+                    TileLayer(
+                      urlTemplate:
+                          'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                      subdomains: ['a', 'b', 'c'],
+                    ),
+                    MarkerLayer(
+                      markers: [
+                        Marker(
+                          point: currentPosition,
+                          width: 80,
+                          height: 80,
+                          child: const Icon(
+                            Icons.location_pin,
+                            color: Colors.red,
+                            size: 40,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Text(
           currentCity,
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
         ),
         Text(
           'Lat: ${currentPosition.latitude}, Lng: ${currentPosition.longitude}',
-          style: TextStyle(fontSize: 16, color: Colors.white),
+          style: const TextStyle(fontSize: 16, color: Colors.white),
         ),
       ],
     );
