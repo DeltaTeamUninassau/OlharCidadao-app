@@ -28,7 +28,7 @@ class _PhotoPreviewState extends State<PhotoPreview> {
               height: MediaQuery.of(context).size.height / 1.3,
               decoration: BoxDecoration(
                   border: Border.all(
-                      width: 5,
+                      width: 2,
                       color: const Color.fromARGB(255, 37, 110, 105))),
               child: SizedBox(
                 height: double.infinity,
@@ -42,7 +42,7 @@ class _PhotoPreviewState extends State<PhotoPreview> {
         width: 328,
         height: 48,
         child: FloatingActionButton(
-          backgroundColor: const Color.fromARGB(255, 37, 110, 105),
+          backgroundColor: const Color.fromARGB(255, 12, 26, 25),
           onPressed: () {
             Navigator.push(
                 context,

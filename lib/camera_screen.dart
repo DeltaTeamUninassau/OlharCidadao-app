@@ -11,7 +11,9 @@ class CameraScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-        debugShowCheckedModeBanner: false, home: CameraApp());
+      debugShowCheckedModeBanner: false,
+      home: CameraApp(),
+    );
   }
 }
 
@@ -106,7 +108,7 @@ class _CameraAppState extends State<CameraApp> {
                   decoration: BoxDecoration(
                       color: Colors.yellow,
                       border: Border.all(
-                          width: 5,
+                          width: 2,
                           color: const Color.fromARGB(255, 37, 110, 105))),
                   child: SizedBox(
                     height: double.infinity,
