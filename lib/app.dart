@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:olharcidadao_app/home_page.dart';
+import 'package:olharcidadao_app/camera_screen.dart';
+import 'package:olharcidadao_app/photo_description.dart';
+import 'package:olharcidadao_app/send_list.dart';
+import 'package:olharcidadao_app/result.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -7,16 +10,13 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Olhar Cidadão',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.indigo,
-        appBarTheme: const AppBarTheme(
-          color: Colors.indigo,
-          foregroundColor: Colors.white,
-        ),
-      ),
-      home: const HomePage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const CameraScreen(),
+        '/photo_description': (context) => const PhotoDescription(),
+        '/send_list': (context) => const SendList(),
+        '/result': (context) => const Result(),
+      },
     );
   }
 }
