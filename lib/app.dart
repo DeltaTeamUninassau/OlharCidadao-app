@@ -13,7 +13,8 @@ class App extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const CameraScreen(),
-        '/photo_description': (context) => const PhotoDescription(),
+        '/photo_description': (context) =>
+            const PhotoDescription(photoPath: ''),
         '/send_list': (context) => const SendList(),
         '/result': (context) => const Result(),
       },

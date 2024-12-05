@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:olharcidadao_app/photo_preview.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 import 'dart:io';
 
 late List<CameraDescription> cameras;
@@ -70,6 +71,7 @@ class _CameraAppState extends State<CameraApp> {
     try {
       await _controller.setFlashMode(_flashMode);
       XFile file = await _controller.takePicture();
+      await GallerySaver.saveImage(file.path); // Salva a foto na galeria
       Navigator.push(
         // ignore: use_build_context_synchronously
         context,

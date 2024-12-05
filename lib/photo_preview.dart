@@ -1,7 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
-
 import 'package:olharcidadao_app/photo_description.dart';
 
 // ignore: must_be_immutable
@@ -47,7 +46,9 @@ class _PhotoPreviewState extends State<PhotoPreview> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const PhotoDescription()));
+                    builder: (context) => const PhotoDescription(
+                          photoPath: '',
+                        )));
           },
           child: const Text(
             "CONTINUAR",

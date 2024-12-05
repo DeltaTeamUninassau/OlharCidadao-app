@@ -1,12 +1,16 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:intl/intl.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:olharcidadao_app/send_list.dart';
+import 'package:path_provider/path_provider.dart';
 
 class PhotoDescription extends StatefulWidget {
-  const PhotoDescription({super.key});
+  final String photoPath;
+
+  const PhotoDescription({super.key, required this.photoPath});
 
   @override
   State<PhotoDescription> createState() => _PhotoDescriptionState();
@@ -15,11 +19,13 @@ class PhotoDescription extends StatefulWidget {
 class _PhotoDescriptionState extends State<PhotoDescription> {
   final LatLng location = LatLng(-7.224688, -39.315518);
   String cityName = 'Carregando...';
+  File? _image;
 
   @override
   void initState() {
     super.initState();
     _getCityName();
+    _loadLastCapturedImage();
   }
 
   Future<void> _getCityName() async {
@@ -41,6 +47,25 @@ class _PhotoDescriptionState extends State<PhotoDescription> {
       setState(() {
         cityName = 'Erro ao carregar cidade';
       });
+    }
+  }
+
+  Future<void> _loadLastCapturedImage() async {
+    final directory = await getExternalStorageDirectory();
+    final Directory dir = Directory('${directory?.path}/Pictures');
+
+    if (await dir.exists()) {
+      final List<FileSystemEntity> files = dir.listSync();
+      files.sort(
+          (a, b) => b.statSync().modified.compareTo(a.statSync().modified));
+
+      if (files.isNotEmpty) {
+        setState(() {
+          _image = File(files.first.path);
+        });
+      }
+    } else {
+      debugPrint('Diretório não encontrado: ${dir.path}');
     }
   }
 
@@ -107,9 +132,12 @@ class _PhotoDescriptionState extends State<PhotoDescription> {
                           width: 60.0,
                           height: 60.0,
                           point: location,
-                          builder: (ctx) => const CircleAvatar(
-                            backgroundImage: NetworkImage(
-                                'https://www.example.com/path/to/your/image.jpg'),
+                          builder: (ctx) => CircleAvatar(
+                            backgroundImage:
+                                _image != null ? FileImage(_image!) : null,
+                            child: _image == null
+                                ? const Icon(Icons.add_a_photo)
+                                : null,
                           ),
                         ),
                       ],
